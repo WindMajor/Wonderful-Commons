@@ -3,6 +3,9 @@ package com.windmajor.wonderful.commons
 import android.os.Build
 
 
+const val SD_OTG_PATTERN = "^/storage/[A-Za-z0-9]{4}-[A-Za-z0-9]{4}$"
+
+
 // shared preferences
 const val PREFS_KEY = "Prefs"
 const val APP_RUN_COUNT = "app_run_count"

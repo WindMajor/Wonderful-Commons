@@ -3,17 +3,57 @@ package com.windmajor.wonderful.commons.extensions
 import android.content.Context
 import android.os.Environment
 import android.text.TextUtils
+import com.windmajor.wonderful.commons.SD_OTG_PATTERN
 import com.windmajor.wonderful.commons.isMarshmallowPlus
 import java.io.File
+import java.lang.Exception
 import java.lang.NumberFormatException
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.collections.HashSet
 
 fun Context.getSDCardPath(): String {
+    val directories = getStorageDirectories().filter {
+        !it.equals(getInternalStoragePath()) && !it.equals("/storage/emulated/0", true)
+                && (baseConfig.OTGPartition.isEmpty() || !it.endsWith(baseConfig.OTGPartition))
+    }
 
+    val fullSDPattern = Pattern.compile(SD_OTG_PATTERN)
+    var sdCardPath = directories.firstOrNull { fullSDPattern.matcher(it).matches() }
+        ?: directories.firstOrNull { !physicalPaths.contains(it.toLowerCase()) } ?: ""
 
-    return "todo"
+    if (sdCardPath.trimEnd('/').isEmpty()) {
+        val file = File("/storage/sdcard1")
+        if (file.exists()) {
+            return file.absolutePath
+        }
+        sdCardPath = directories.firstOrNull() ?: ""
+    }
+
+    if (sdCardPath.isEmpty()) {
+        val sdPattern = Pattern.compile(SD_OTG_PATTERN)
+        try {
+            File("/storage").listFiles()?.forEach {
+                if (sdPattern.matcher(it.name).matches()) {
+                    sdCardPath = "/storage/${it.name}"
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    val finalPath = sdCardPath.trimEnd('/')
+    baseConfig.sdCardPath = finalPath
+    return finalPath
+}
+
+fun Context.getInternalStoragePath(): String {
+    return if (File("/storage/emulated/0").exists()) {
+        "/storage/emulated/0"
+    } else {
+        Environment.getExternalStorageDirectory().absolutePath.trimEnd('/')
+    }
 }
 
 fun Context.getStorageDirectories(): Array<String> {
