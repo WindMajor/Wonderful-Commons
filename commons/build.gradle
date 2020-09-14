@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "guru.stefma.bintrayrelease"
 
 android {
     compileSdkVersion propCompileSdkVersion
@@ -25,5 +26,15 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
+}
 
+version = "1.0.0"
+group = "com.windmajor.wonderful.commons"
+androidArtifact { // 2
+    artifactId = "WonderfulCommons"
+}
+publish {
+    userOrg = 'wangwang'
+    desc = '这是我自己的一个公共类库WonderfulCommons'
+    website = 'https://github.com/WindMajor/Wonderful-Commons.git'
 }
