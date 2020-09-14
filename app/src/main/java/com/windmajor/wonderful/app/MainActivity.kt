@@ -1,4 +1,4 @@
-package com.windmajor.wonderful.commons
+package com.windmajor.wonderful.app
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
