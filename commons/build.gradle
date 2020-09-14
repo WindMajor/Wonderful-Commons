@@ -28,13 +28,13 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
 }
 
-version = "1.0.0"
-group = "com.windmajor.wonderful.commons"
-androidArtifact { // 2
+version = "1.0.1"
+group = "com.windmajor"
+androidArtifact {
     artifactId = "WonderfulCommons"
 }
 publish {
-    userOrg = 'wangwang'
+    userOrg = 'windmajor'
     desc = '这是我自己的一个公共类库WonderfulCommons'
     website = 'https://github.com/WindMajor/Wonderful-Commons.git'
 }
