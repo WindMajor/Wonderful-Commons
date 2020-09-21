@@ -1,6 +1,8 @@
 package com.windmajor.wonderful.commons.extensions
 
 import android.content.Context
+import android.hardware.usb.UsbConstants
+import android.hardware.usb.UsbManager
 import android.os.Environment
 import android.text.TextUtils
 import com.windmajor.wonderful.commons.SD_OTG_PATTERN
@@ -46,6 +48,19 @@ fun Context.getSDCardPath(): String {
     val finalPath = sdCardPath.trimEnd('/')
     baseConfig.sdCardPath = finalPath
     return finalPath
+}
+
+fun Context.hasExternalSDCard() = sdCardPath.isNotEmpty()
+
+fun Context.hasOTGConnected(): Boolean {
+    val usbManager = getSystemService(Context.USB_SERVICE) as UsbManager
+    return try {
+        usbManager.deviceList.any {
+            it.value.getInterface(0).interfaceClass == UsbConstants.USB_CLASS_MASS_STORAGE
+        }
+    } catch (e: Exception) {
+        false
+    }
 }
 
 fun Context.getInternalStoragePath(): String {

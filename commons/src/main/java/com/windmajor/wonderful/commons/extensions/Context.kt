@@ -11,6 +11,9 @@ import com.windmajor.wonderful.commons.helpers.BaseConfig
 val Context.baseConfig: BaseConfig
     get() = BaseConfig.newInstance(this)
 
+val Context.sdCardPath: String
+    get() = baseConfig.sdCardPath
+
 val Context.isRTLLayout: Boolean
     get() = resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL
 
