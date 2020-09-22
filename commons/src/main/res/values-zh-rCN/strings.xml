@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="root">根目录</string>
+
+    <!--  Storage  -->
+    <string name="internal">内部存储器</string>
+    <string name="sd_card">SD 卡</string>
+
+    <!--  OTG devices  -->
+    <string name="usb">USB</string>
+</resources>

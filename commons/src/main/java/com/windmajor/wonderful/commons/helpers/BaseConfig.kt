@@ -2,6 +2,7 @@ package com.windmajor.wonderful.commons.helpers
 
 import android.content.Context
 import com.windmajor.wonderful.commons.*
+import com.windmajor.wonderful.commons.extensions.getInternalStoragePath
 import com.windmajor.wonderful.commons.extensions.getSDCardPath
 import com.windmajor.wonderful.commons.extensions.getSharedPrefs
 
@@ -40,6 +41,15 @@ open class BaseConfig(private val context: Context) {
         get() = prefs.getString(SD_CARD_PATH, getDefaultSDCardPath()) ?: ""
         set(sdCardPath) = prefs.edit().putString(SD_CARD_PATH, sdCardPath).apply()
 
-    private fun getDefaultSDCardPath() = if (prefs.contains(SD_CARD_PATH)) "" else context.getSDCardPath()
+    private fun getDefaultSDCardPath() =
+        if (prefs.contains(SD_CARD_PATH)) "" else context.getSDCardPath()
+
+    var internalStoragePath: String
+        get() = prefs.getString(INTERNAL_STORAGE_PATH, getDefaultInternalPath())!!
+        set(internalStoragePath) = prefs.edit()
+            .putString(INTERNAL_STORAGE_PATH, internalStoragePath).apply()
+
+    private fun getDefaultInternalPath() =
+        if (prefs.contains(INTERNAL_STORAGE_PATH)) "" else context.getInternalStoragePath()
 
 }

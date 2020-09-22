@@ -5,6 +5,7 @@ import android.hardware.usb.UsbConstants
 import android.hardware.usb.UsbManager
 import android.os.Environment
 import android.text.TextUtils
+import com.windmajor.wonderful.commons.R
 import com.windmajor.wonderful.commons.SD_OTG_PATTERN
 import com.windmajor.wonderful.commons.isMarshmallowPlus
 import java.io.File
@@ -115,6 +116,17 @@ fun Context.getStorageDirectories(): Array<String> {
         Collections.addAll(paths, *rawSecondaryStorages)
     }
     return paths.map { it.trimEnd('/') }.toTypedArray()
+}
+
+fun Context.getHumanReadablePath(path: String): String {
+    return getString(
+        when (path) {
+            "/" -> R.string.root
+            internalStoragePath -> R.string.internal
+            otgPath -> R.string.usb
+            else -> R.string.sd_card
+        }
+    )
 }
 
 

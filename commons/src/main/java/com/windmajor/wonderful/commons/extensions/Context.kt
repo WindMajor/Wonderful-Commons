@@ -14,6 +14,12 @@ val Context.baseConfig: BaseConfig
 val Context.sdCardPath: String
     get() = baseConfig.sdCardPath
 
+val Context.internalStoragePath:String
+    get() = baseConfig.internalStoragePath
+
+val Context.otgPath: String
+    get() = baseConfig.OTGPath
+
 val Context.isRTLLayout: Boolean
     get() = resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL
 

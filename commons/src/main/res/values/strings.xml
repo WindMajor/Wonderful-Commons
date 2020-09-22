@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="root">Root</string>
+
+    <!--  Storage  -->
+    <string name="internal">Internal</string>
+    <string name="sd_card">SD Card</string>
+
+    <!--  OTG devices  -->
+    <string name="usb">USB</string>
+</resources>
