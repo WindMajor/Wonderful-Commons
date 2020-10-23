@@ -64,14 +64,6 @@ fun Context.hasOTGConnected(): Boolean {
     }
 }
 
-fun Context.getInternalStoragePath(): String {
-    return if (File("/storage/emulated/0").exists()) {
-        "/storage/emulated/0"
-    } else {
-        Environment.getExternalStorageDirectory().absolutePath.trimEnd('/')
-    }
-}
-
 fun Context.getStorageDirectories(): Array<String> {
     val paths = HashSet<String>()
     val rawExternalStorage = System.getenv("EXTERNAL_STORAGE")
@@ -128,6 +120,24 @@ fun Context.getHumanReadablePath(path: String): String {
         }
     )
 }
+
+fun Context.humanizePath(path:String) :String {
+    val trimmedEnd = path.trimEnd('/')
+
+    return "！！"
+}
+
+fun Context.getInternalStoragePath(): String {
+    return if (File("/storage/emulated/0").exists()) {
+        "/storage/emulated/0"
+    } else {
+        Environment.getExternalStorageDirectory().absolutePath.trimEnd('/')
+    }
+}
+
+fun Context.isPathOnSD(path:String) = sdCardPath.isNotEmpty() && path.startsWith(sdCardPath)
+
+fun Context.isPathOnOTG(path: String) = otgPath.isNotEmpty() && path.startsWith(otgPath)
 
 
 private val physicalPaths = arrayListOf(

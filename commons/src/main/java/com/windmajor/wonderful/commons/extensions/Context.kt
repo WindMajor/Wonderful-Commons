@@ -14,7 +14,7 @@ val Context.baseConfig: BaseConfig
 val Context.sdCardPath: String
     get() = baseConfig.sdCardPath
 
-val Context.internalStoragePath:String
+val Context.internalStoragePath: String // 通常的结果： /storage/emulated/0
     get() = baseConfig.internalStoragePath
 
 val Context.otgPath: String
